@@ -4,21 +4,19 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     //Constants
-    private const int LANES = 4;
-    public float[] pos = new float[LANES] { -3.5f, -1.5f, 1.5f, 3.5f };
+    private const int NUM_OF_LANES = 4;
+    public float[] pos = new float[NUM_OF_LANES];
     public int lane;
-    public float y_pos = -3.5f;
-    public int move_CD = 10; //frames
-    private int remaining_move_CD = 0;
-
+    public float y_pos;
+    
 
 	// Use this for initialization
 	void Start () {
         // make sure starting lane is valid
         if (lane < 0)
             lane = 0;
-        else if (lane > LANES-1)
-            lane = LANES-1;
+        else if (lane > NUM_OF_LANES-1)
+            lane = NUM_OF_LANES-1;
 
         // set starting position
         transform.position = new Vector3(pos[lane], y_pos, 0f);
@@ -26,31 +24,22 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (remaining_move_CD == 0){
-            MovePlayer();
-            remaining_move_CD = move_CD;
-        }
-
-        // tick down movement CD
-        remaining_move_CD -= 1;
-        if (remaining_move_CD < 0)
-            remaining_move_CD = 0;
+        MovePlayer();
 	}
 
     void MovePlayer ()
     {
-        float direction = Input.GetAxis("Horizontal");
-        int move = 0;
-
-        // going right or left?
-        if (direction < 0)
-            move = -1;
-        else if (direction > 0)
-            move = 1;
-
-        // if player isn't headed out of bounds, then commit the move
-        if (lane + move >= 0 && lane + direction < LANES)
-            lane = lane + move;
+        // check for input
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            if (lane - 1 >= 0)
+                lane -= 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            if (lane + 1 < NUM_OF_LANES)
+                lane += 1;
+        }
 
         // update player position
         transform.position = new Vector3(pos[lane], y_pos, 0f);
