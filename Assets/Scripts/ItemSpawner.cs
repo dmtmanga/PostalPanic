@@ -4,10 +4,6 @@ using System.Collections;
 public class ItemSpawner : MonoBehaviour {
 
     // Item Prefabs
-    //public GameObject letter;
-    //public GameObject package;
-    //public GameObject postcard;
-    //public GameObject bomb;
     public GameObject[] items = new GameObject[4];
 
     // Public Variables

@@ -44,14 +44,18 @@ MonoBehaviour:
   - {fileID: 126012, guid: 2879f4c2cf9c66b49bf6049c5bd9c210, type: 2}
   - {fileID: 158664, guid: d434b4199041664489debd31d6d96593, type: 2}
   - {fileID: 198416, guid: eec2b386cc395534695ddfee262998bb, type: 2}
-  spawnCD: 45
+  spawnCD: 120
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: spawnCD
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116740}
