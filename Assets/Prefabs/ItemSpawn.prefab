@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 438936}
+  - 114: {fileID: 11471338}
   m_Layer: 0
   m_Name: ItemSpawn
   m_TagString: Untagged
@@ -27,6 +28,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11471338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd2b3662837f25a448675040b821b45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 195328, guid: a7a8cb5aff9e7d1419a4224ef82d4e42, type: 2}
+  - {fileID: 126012, guid: 2879f4c2cf9c66b49bf6049c5bd9c210, type: 2}
+  - {fileID: 158664, guid: d434b4199041664489debd31d6d96593, type: 2}
+  - {fileID: 198416, guid: eec2b386cc395534695ddfee262998bb, type: 2}
+  spawnCD: 45
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

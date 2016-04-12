@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bomb
+  - Heart1
+  - Heart2
+  - Heart3
   layers:
   - Default
   - TransparentFX
@@ -38,14 +42,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1390298063
+    locked: 1
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
-    uniqueID: 1390298063
-    locked: 0
   - name: Foreground
     uniqueID: 2244493117
+    locked: 0
+  - name: HUD Base
+    uniqueID: 989859755
     locked: 0
   - name: HUD
     uniqueID: 3372336005

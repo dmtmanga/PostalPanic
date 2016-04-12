@@ -3,15 +3,23 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-    //Constants
+    // Constants
     private const int NUM_OF_LANES = 4;
+
+    // Public Variables
     public float[] pos = new float[NUM_OF_LANES];
     public int lane;
     public float y_pos;
     
+    // Private Variables
+    private GameObject _HUD;
+    private HudManager _hudManager;
 
 	// Use this for initialization
 	void Start () {
+        _HUD = GameObject.Find("HUD");
+        _hudManager = _HUD.GetComponent<HudManager>();
+
         // make sure starting lane is valid
         if (lane < 0)
             lane = 0;
@@ -22,11 +30,25 @@ public class PlayerController : MonoBehaviour {
         transform.position = new Vector3(pos[lane], y_pos, 0f);
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
         MovePlayer();
 	}
 
+
+    // When an item collides with the player
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Bomb")
+        {
+            _hudManager.TakeDamage();
+            Destroy(col.gameObject);
+        }
+    }
+
+
+    // Checks for input and moves the player
     void MovePlayer ()
     {
         // check for input
