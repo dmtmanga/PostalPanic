@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour {
 
     private const int MAX_HP = 3;
 
-    public PlayerController player;
+    public GameObject player;
 
     private bool gameOver;
     private bool restart;
@@ -51,6 +51,11 @@ public class GameController : MonoBehaviour {
             {
                 SceneManager.LoadScene("Game01");
             }
+        }
+
+        if (!gameOver)
+        {
+            Score(1);
         }
     }
 
@@ -133,7 +138,7 @@ public class GameController : MonoBehaviour {
     {
         gameOver = true;
         gameOverText.text = "GAME OVER";
-        Destroy(player, 1.0f);
+        Destroy(player);
     }
 
 
