@@ -40,11 +40,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 195328, guid: a7a8cb5aff9e7d1419a4224ef82d4e42, type: 2}
   - {fileID: 126012, guid: 2879f4c2cf9c66b49bf6049c5bd9c210, type: 2}
+  - {fileID: 195328, guid: a7a8cb5aff9e7d1419a4224ef82d4e42, type: 2}
   - {fileID: 158664, guid: d434b4199041664489debd31d6d96593, type: 2}
   - {fileID: 198416, guid: eec2b386cc395534695ddfee262998bb, type: 2}
-  spawnCD: 120
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

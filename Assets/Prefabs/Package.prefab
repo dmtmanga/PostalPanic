@@ -55,7 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833e598fb27d8fc48a659e4d91d7b355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 0.2
+  fallDelay: 3
+  pointValue: 50
 --- !u!212 &21266824
 SpriteRenderer:
   m_ObjectHideFlags: 1
