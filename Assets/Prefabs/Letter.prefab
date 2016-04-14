@@ -11,9 +11,10 @@ GameObject:
   - 212: {fileID: 21278706}
   - 114: {fileID: 11482478}
   - 61: {fileID: 6125884}
+  - 50: {fileID: 5064036}
   m_Layer: 0
   m_Name: Letter
-  m_TagString: Untagged
+  m_TagString: Letter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,6 +31,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5064036
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195328}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &6125884
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -55,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833e598fb27d8fc48a659e4d91d7b355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallDelay: 4
+  fallDelay: 3
   pointValue: 20
 --- !u!212 &21278706
 SpriteRenderer:
@@ -93,7 +111,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Letter
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fallDelay
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195328}

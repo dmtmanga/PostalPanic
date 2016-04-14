@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bomb
-  - Heart1
-  - Heart2
-  - Heart3
+  - Postcard
+  - Letter
+  - Package
   layers:
   - Default
   - TransparentFX

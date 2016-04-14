@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour {
 
     private const int MAX_HP = 3;
 
+    public PlayerController player;
+
     private bool gameOver;
     private bool restart;
 
@@ -14,9 +16,10 @@ public class GameController : MonoBehaviour {
     public float spawnWait;
     public float waveWait;
 
+    private int score;
     public GUIText scoreText;
     public GUIText restartText;
-    private int score;
+    public GUIText gameOverText;
 
     public GameObject fullHeartPrefab;
     private int _HP;
@@ -30,8 +33,10 @@ public class GameController : MonoBehaviour {
     {
         gameOver = false;
         restart = false;
-        scoreText.text = "";
+        score = 0;
+        scoreText.text = "" + score;
         restartText.text = "";
+        gameOverText.text = "";
         _HP = MAX_HP;
         UpdateHealth();
 
@@ -51,29 +56,25 @@ public class GameController : MonoBehaviour {
 
     IEnumerator SpawnWaves()
     {
-        int spawnIndex; // [0:3]
-        int itemIndex; // 0: postcard | 1: letter | 2: package | 3: bomb
-        int rngValue;
-
+        yield return new WaitForSeconds(startWait);
         while (true)
         {
             for (int i = 0; i < itemsPerWave; i++)
             {
-                spawnIndex = Random.Range(0, 4);
-                rngValue = Random.Range(0, 100);
+                int spawnIndex = Random.Range(0, 4);
+                int rngValue = Random.Range(0, 100);
+                int itemIndex; // 0: postcard | 1: letter | 2: package | 3: bomb
                 if (rngValue < 20)
-                    itemIndex = -1;
-                else if (rngValue < 55)
                     itemIndex = 0;
-                else if (rngValue < 70)
+                else if (rngValue < 60)
                     itemIndex = 1;
-                else if (rngValue < 80)
+                else if (rngValue < 70)
                     itemIndex = 2;
                 else
                     itemIndex = 3;
 
                 spawnPoints[spawnIndex].SpawnItem(itemIndex);
-                Debug.Log("Spawn attempt made at point " + spawnIndex);
+                //Debug.Log("Spawn attempt made at point " + spawnIndex);
                 yield return new WaitForSeconds(spawnWait);
             }
             yield return new WaitForSeconds(waveWait);
@@ -131,6 +132,8 @@ public class GameController : MonoBehaviour {
     public void GameOver()
     {
         gameOver = true;
+        gameOverText.text = "GAME OVER";
+        Destroy(player, 1.0f);
     }
 
 
@@ -139,6 +142,12 @@ public class GameController : MonoBehaviour {
         _HP -= 1;
         _HP = Mathf.Clamp(_HP, 0, 3);
         UpdateHealth();
-        Debug.Log("Damage Taken! Current HP is " + _HP);
+        //Debug.Log("Damage Taken! Current HP is " + _HP);
+    }
+
+    public void Score( int points)
+    {
+        score += points;
+        scoreText.text = "" + score;
     }
 }

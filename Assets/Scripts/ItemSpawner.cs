@@ -10,7 +10,7 @@ public class ItemSpawner : MonoBehaviour {
         if (index < 0)
             return;
         Instantiate(items[index], transform.position, Quaternion.identity);
-        Debug.Log("SpawnItem func successfully called to spawn item index " + index);
+        //Debug.Log("SpawnItem func successfully called to spawn item index " + index);
     }
 
 

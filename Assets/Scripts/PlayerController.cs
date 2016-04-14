@@ -2,16 +2,13 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
+    public GameController gameController;
     public float[] pos = new float[4];
     public int lane;
     public float y_pos;
-    private GameObject _gcObject;
-    private GameController gameController;
-
+    
 
 	void Start () {
-        _gcObject = GameObject.FindGameObjectWithTag("GameController");
-        gameController = _gcObject.GetComponent<GameController>();
 
         // ensure valid starting lane
         lane = Mathf.Clamp(lane, 0, 3);
@@ -31,6 +28,12 @@ public class PlayerController : MonoBehaviour {
         if (col.gameObject.tag == "Bomb")
         {
             gameController.TakeDamage();
+            Destroy(col.gameObject);
+        }
+        else
+        {
+            ItemController item = col.gameObject.GetComponent<ItemController>();
+            gameController.Score(item.NumOfPoints());
             Destroy(col.gameObject);
         }
     }
