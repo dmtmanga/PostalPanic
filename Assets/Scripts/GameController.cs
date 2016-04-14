@@ -2,6 +2,13 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+
+public class GameData
+{
+    public static int score1 = 0;
+    public static int score2 = 0;
+}
+
 public class GameController : MonoBehaviour {
 
     private const int MAX_HP = 3;
@@ -27,7 +34,7 @@ public class GameController : MonoBehaviour {
     private GameObject[] hearts = new GameObject[3];
 
     public ItemSpawner[] spawnPoints = new ItemSpawner[4];
-    
+
 
     void Start()
     {
@@ -81,18 +88,16 @@ public class GameController : MonoBehaviour {
                 spawnPoints[spawnIndex].SpawnItem(itemIndex);
                 //Debug.Log("Spawn attempt made at point " + spawnIndex);
                 yield return new WaitForSeconds(spawnWait);
+
+                if (gameOver)
+                {
+                    restartText.text = "Press 'Space' to Restart";
+                    restart = true;
+                    break;
+                }
             }
             yield return new WaitForSeconds(waveWait);
-
-            if (gameOver)
-            {
-                restartText.text = "Press 'Space' to Restart";
-                restart = true;
-                break;
-            }
         }
-
-        yield return new WaitForSeconds(startWait);
     }
 
 
