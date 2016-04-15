@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     private const int MAX_HP = 3;
 
     public GameObject player;
+    private Animator playerAnim;
 
     private bool gameOver;
     private bool restart;
@@ -29,7 +30,7 @@ public class GameController : MonoBehaviour {
     public GUIText gameOverText;
 
     public GameObject fullHeartPrefab;
-    private int _HP;
+    private int hp;
     public GameObject[] heartSlots = new GameObject[3];
     private GameObject[] hearts = new GameObject[3];
 
@@ -38,14 +39,15 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
+        playerAnim = player.GetComponent<Animator>();
         gameOver = false;
         restart = false;
         score = 0;
         scoreText.text = "" + score;
         restartText.text = "";
         gameOverText.text = "";
-        _HP = MAX_HP;
-        UpdateHealth();
+        hp = MAX_HP;
+        UpdateHealthUI();
 
         StartCoroutine (SpawnWaves());
     }
@@ -101,22 +103,22 @@ public class GameController : MonoBehaviour {
     }
 
 
-    void UpdateHealth()
+    void UpdateHealthUI()
     {
-        if (_HP == 3)
-            UpdateHealthFiller(3);
-        else if (_HP == 2)
+        if (hp == 3)
+            UpdateHealthUIFiller(3);
+        else if (hp == 2)
         {
             GameObject.Destroy(hearts[2]);
-            UpdateHealthFiller(2);
+            UpdateHealthUIFiller(2);
         }
-        else if (_HP == 1)
+        else if (hp == 1)
         {
             for (int i = 1; i < 3; i++)
             {
                 GameObject.Destroy(hearts[i]);
             }
-            UpdateHealthFiller(1);
+            UpdateHealthUIFiller(1);
         }
         else // HP 0 - He's dead, Jim
         {
@@ -124,35 +126,44 @@ public class GameController : MonoBehaviour {
             {
                 GameObject.Destroy(hearts[i]);
             }
-            GameOver();
         }
     }
 
 
     // Recursive function to update heart display based on HP
-    void UpdateHealthFiller(int heart)
+    void UpdateHealthUIFiller(int heart)
     {
         if (hearts[heart - 1] == null)
             hearts[heart - 1] = (GameObject) Instantiate(fullHeartPrefab, heartSlots[heart - 1].transform.position, new Quaternion());
         if (heart > 1)
-            UpdateHealthFiller(heart - 1);
+            UpdateHealthUIFiller(heart - 1);
     }
 
 
     public void GameOver()
     {
         gameOver = true;
+        playerAnim.SetBool("Dead", true);
+        GameData.score1 = score;
         gameOverText.text = "GAME OVER";
-        Destroy(player);
+        Destroy(player.GetComponent<PlayerController>());
     }
 
 
     public void TakeDamage( int dmg)
     {
-        _HP -= dmg;
-        _HP = Mathf.Clamp(_HP, 0, 3);
-        UpdateHealth();
+        hp -= dmg;
+        hp = Mathf.Clamp(hp, 0, 3);
+        
         //Debug.Log("Damage Taken! Current HP is " + _HP);
+        if (dmg == 3)
+            playerAnim.SetTrigger("BombHit");
+        else
+            playerAnim.SetTrigger("ItemMiss");
+        if (hp <= 0)
+            GameOver();
+
+        UpdateHealthUI();
     }
 
     public void Score( int points)

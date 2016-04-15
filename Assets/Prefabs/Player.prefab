@@ -9,7 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 434154}
   - 212: {fileID: 21293230}
+  - 61: {fileID: 6128800}
   - 114: {fileID: 11443042}
+  - 95: {fileID: 9538322}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -29,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6128800
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179246}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -0.23}
+  serializedVersion: 2
+  m_Size: {x: 2.3, y: 1}
+--- !u!95 &9538322
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179246}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 81df7ca0a458b154381dd175013345c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11443042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167a012173d78ba4f8897b1065eff9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
   pos:
   - -3.55
   - -1.18

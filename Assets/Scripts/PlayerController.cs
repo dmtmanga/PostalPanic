@@ -6,9 +6,11 @@ public class PlayerController : MonoBehaviour {
     public float[] pos = new float[4];
     public int lane;
     public float y_pos;
+    private Animator anim;
     
 
 	void Start () {
+        anim = GetComponent<Animator>();
 
         // ensure valid starting lane
         lane = Mathf.Clamp(lane, 0, 3);
@@ -32,6 +34,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            anim.SetTrigger("ItemPickUp");
             ItemController item = col.gameObject.GetComponent<ItemController>();
             gameController.Score(item.NumOfPoints());
             Destroy(col.gameObject);
