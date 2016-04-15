@@ -786,15 +786,15 @@ GUIText:
   m_GameObject: {fileID: 1564911845}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: 0000000
+  m_Text: 00000000
   m_Anchor: 2
   m_Alignment: 2
-  m_PixelOffset: {x: 5, y: 0}
+  m_PixelOffset: {x: 0.33, y: -8.52}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 12800000, guid: 3904083a80dd3e142844da7e5ce35259, type: 3}
+  m_Font: {fileID: 12800000, guid: a4c64b295e6632a4c98a21e9ff65fbf7, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 85
+  m_FontSize: 40
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
