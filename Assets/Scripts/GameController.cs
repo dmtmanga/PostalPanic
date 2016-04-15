@@ -78,9 +78,9 @@ public class GameController : MonoBehaviour {
                 int itemIndex; // 0: postcard | 1: letter | 2: package | 3: bomb
                 if (rngValue < 20)
                     itemIndex = 0;
-                else if (rngValue < 60)
+                else if (rngValue < 50)
                     itemIndex = 1;
-                else if (rngValue < 70)
+                else if (rngValue < 80)
                     itemIndex = 2;
                 else
                     itemIndex = 3;
@@ -147,9 +147,9 @@ public class GameController : MonoBehaviour {
     }
 
 
-    public void TakeDamage()
+    public void TakeDamage( int dmg)
     {
-        _HP -= 1;
+        _HP -= dmg;
         _HP = Mathf.Clamp(_HP, 0, 3);
         UpdateHealth();
         //Debug.Log("Damage Taken! Current HP is " + _HP);

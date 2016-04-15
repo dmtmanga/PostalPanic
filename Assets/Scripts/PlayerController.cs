@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (col.gameObject.tag == "Bomb")
         {
-            gameController.TakeDamage();
+            gameController.TakeDamage(3);
             Destroy(col.gameObject);
         }
         else
