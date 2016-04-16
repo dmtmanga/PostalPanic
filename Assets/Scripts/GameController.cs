@@ -12,6 +12,9 @@ public class GameData
 public class GameController : MonoBehaviour {
     public GameObject player;
     private Animator playerAnim;
+    private AudioSource audioSource;
+    public AudioClip bgm;
+    public AudioClip gameOverBgm;
 
     private bool gameOver;
     private bool restart;
@@ -26,8 +29,10 @@ public class GameController : MonoBehaviour {
     public GUIText scoreText;
     //public GUIText restartText;
     //public GUIText gameOverText;
-    public SpriteRenderer gameOverSprite;
-    public SpriteRenderer restartSprite;
+    public GameObject gameOverSpriteObj;
+    public GameObject restartSpriteObj;
+    public GameObject collectMailSpriteObj;
+    public GameObject dontBlowUpSpriteObj;
 
     public GameObject fullHeartPrefab;
     private int hp;
@@ -36,38 +41,51 @@ public class GameController : MonoBehaviour {
 
     public ItemSpawner[] spawnPoints = new ItemSpawner[4];
 
+    void Awake()
+    {
+        playerAnim = player.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
-        playerAnim = player.GetComponent<Animator>();
+        audioSource.clip = bgm;
+        audioSource.Play();
         gameOver = false;
         restart = false;
         score = 0;
         scoreText.text = "" + score;
         //restartText.text = "";
         //gameOverText.text = "";
-        gameOverSprite.enabled = false;
-        restartSprite.enabled = false;
+        gameOverSpriteObj.SetActive(false);
+        restartSpriteObj.SetActive(false);
+        collectMailSpriteObj.SetActive(false);
+        dontBlowUpSpriteObj.SetActive(false);
         hp = 3;
         UpdateHealthUI();
-
+        StartCoroutine (Instructions());
         StartCoroutine (SpawnWaves());
     }
 
     void Update()
     {
         if (restart)
-        {
             if (Input.GetKeyDown (KeyCode.Space))
-            {
                 SceneManager.LoadScene("Game01");
-            }
-        }
 
         if (!gameOver)
-        {
             Score(1);
-        }
+    }
+
+    IEnumerator Instructions()
+    {
+        collectMailSpriteObj.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+        collectMailSpriteObj.GetComponent<SpriteRenderer>().enabled = false;
+        dontBlowUpSpriteObj.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        collectMailSpriteObj.SetActive(false);
+        dontBlowUpSpriteObj.SetActive(false);
     }
 
     IEnumerator SpawnWaves()
@@ -96,7 +114,7 @@ public class GameController : MonoBehaviour {
                 {
                     yield return new WaitForSeconds(restartWait);
                     //restartText.text = "Press 'Space' to Restart";
-                    restartSprite.enabled = true;
+                    restartSpriteObj.SetActive(true);
                     restart = true;
                     break;
                 }
@@ -119,18 +137,12 @@ public class GameController : MonoBehaviour {
         else if (hp == 1)
         {
             for (int i = 1; i < 3; i++)
-            {
                 GameObject.Destroy(hearts[i]);
-            }
             UpdateHealthUIFiller(1);
         }
         else // HP 0 - He's dead, Jim
-        {
             for (int i = 0; i < 3; i++ )
-            {
                 GameObject.Destroy(hearts[i]);
-            }
-        }
     }
 
 
@@ -146,12 +158,18 @@ public class GameController : MonoBehaviour {
 
     public void GameOver()
     {
-        gameOver = true;
-        playerAnim.SetBool("Dead", true);
-        GameData.score1 = score;
-        //gameOverText.text = "GAME OVER";
-        gameOverSprite.enabled = true;
-        Destroy(player.GetComponent<PlayerController>());
+        if (!gameOver)
+        {
+            gameOver = true;
+            playerAnim.SetBool("Dead", true);
+            GameData.score1 = score;
+            //gameOverText.text = "GAME OVER";
+            gameOverSpriteObj.SetActive(true);
+            audioSource.Stop();
+            audioSource.clip = gameOverBgm;
+            audioSource.Play();
+            Destroy(player.GetComponent<PlayerController>());
+        }
     }
 
 
