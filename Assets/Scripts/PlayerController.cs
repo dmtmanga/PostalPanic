@@ -4,15 +4,24 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
     public GameController gameController;
     public GameObject explosion;
+
     public float[] pos = new float[4];
     public int lane;
     public float y_pos;
+
     private Animator anim;
-    
+    private AudioSource source;
+    public AudioClip explode;
+    public AudioClip exploderp;
+    public AudioClip pickup;
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
+    }
 
 	void Start () {
-        anim = GetComponent<Animator>();
-
         // ensure valid starting lane
         lane = Mathf.Clamp(lane, 0, 3);
 
@@ -30,12 +39,14 @@ public class PlayerController : MonoBehaviour {
     {
         if (col.gameObject.tag == "Bomb")
         {
+            source.PlayOneShot(explode);
             Instantiate(explosion, transform.position, Quaternion.identity);
             gameController.TakeDamage(3);
             Destroy(col.gameObject);
         }
         else
         {
+            source.PlayOneShot(pickup);
             anim.SetTrigger("ItemPickUp");
             ItemController item = col.gameObject.GetComponent<ItemController>();
             gameController.Score(item.NumOfPoints());
