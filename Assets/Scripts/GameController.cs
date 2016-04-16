@@ -160,19 +160,21 @@ public class GameController : MonoBehaviour {
     }
 
 
-    public void GameOver()
+    IEnumerator GameOver()
     {
         if (!gameOver)
         {
             gameOver = true;
             playerAnim.SetBool("Dead", true);
+            Destroy(player.GetComponent<PlayerController>());
             GameData.score1 = score;
+            yield return new WaitForSeconds(2f);
             //gameOverText.text = "GAME OVER";
             gameOverSpriteObj.SetActive(true);
             audioSource.Stop();
             audioSource.clip = gameOverBgm;
             audioSource.Play();
-            Destroy(player.GetComponent<PlayerController>());
+            
         }
     }
 
@@ -192,7 +194,7 @@ public class GameController : MonoBehaviour {
                 audioSource.PlayOneShot(itemMiss);
         }
             if (hp <= 0)
-            GameOver();
+            StartCoroutine(GameOver());
 
         UpdateHealthUI();
     }
