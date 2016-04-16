@@ -15,7 +15,9 @@ public class GameController : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip bgm;
     public AudioClip gameOverBgm;
+    public AudioClip itemMiss;
 
+    private bool gameStart;
     private bool gameOver;
     private bool restart;
 
@@ -51,6 +53,7 @@ public class GameController : MonoBehaviour {
     {
         audioSource.clip = bgm;
         audioSource.Play();
+        gameStart = false;
         gameOver = false;
         restart = false;
         score = 0;
@@ -73,7 +76,7 @@ public class GameController : MonoBehaviour {
             if (Input.GetKeyDown (KeyCode.Space))
                 SceneManager.LoadScene("Game01");
 
-        if (!gameOver)
+        if (gameStart && !gameOver)
             Score(1);
     }
 
@@ -86,6 +89,7 @@ public class GameController : MonoBehaviour {
         yield return new WaitForSeconds(4f);
         collectMailSpriteObj.SetActive(false);
         dontBlowUpSpriteObj.SetActive(false);
+        gameStart = true;
     }
 
     IEnumerator SpawnWaves()
@@ -182,8 +186,12 @@ public class GameController : MonoBehaviour {
         if (dmg == 3)
             playerAnim.SetTrigger("BombHit");
         else
+        {
             playerAnim.SetTrigger("ItemMiss");
-        if (hp <= 0)
+            if(!gameOver)
+                audioSource.PlayOneShot(itemMiss);
+        }
+            if (hp <= 0)
             GameOver();
 
         UpdateHealthUI();

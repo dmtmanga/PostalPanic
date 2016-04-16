@@ -390,6 +390,7 @@ MonoBehaviour:
   player: {fileID: 268973547}
   bgm: {fileID: 8300000, guid: df66f964bb884394888353044e859c8c, type: 3}
   gameOverBgm: {fileID: 8300000, guid: e9cff82d19b340844bc50e2c3066bd31, type: 3}
+  itemMiss: {fileID: 8300000, guid: 46f921c425e8043f797ad496e6670211, type: 3}
   itemsPerWave: 30
   startWait: 8
   restartWait: 5
@@ -933,6 +934,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 102606, guid: d2e0e98a40759c14dbbb95957432f7b8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2e0e98a40759c14dbbb95957432f7b8, type: 2}
   m_IsPrefabParent: 0
@@ -1018,7 +1023,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1563663650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.443, y: 3.9125, z: 0}
+  m_LocalPosition: {x: -3.9125, y: 3.9125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 469136397}
@@ -1163,7 +1168,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284228635
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!4 &1564911847
