@@ -10,9 +10,6 @@ public class GameData
 }
 
 public class GameController : MonoBehaviour {
-
-    private const int MAX_HP = 3;
-
     public GameObject player;
     private Animator playerAnim;
 
@@ -21,13 +18,16 @@ public class GameController : MonoBehaviour {
 
     public int itemsPerWave;
     public float startWait;
+    public float restartWait;
     public float spawnWait;
     public float waveWait;
 
     private int score;
     public GUIText scoreText;
-    public GUIText restartText;
-    public GUIText gameOverText;
+    //public GUIText restartText;
+    //public GUIText gameOverText;
+    public SpriteRenderer gameOverSprite;
+    public SpriteRenderer restartSprite;
 
     public GameObject fullHeartPrefab;
     private int hp;
@@ -44,9 +44,11 @@ public class GameController : MonoBehaviour {
         restart = false;
         score = 0;
         scoreText.text = "" + score;
-        restartText.text = "";
-        gameOverText.text = "";
-        hp = MAX_HP;
+        //restartText.text = "";
+        //gameOverText.text = "";
+        gameOverSprite.enabled = false;
+        restartSprite.enabled = false;
+        hp = 3;
         UpdateHealthUI();
 
         StartCoroutine (SpawnWaves());
@@ -89,14 +91,16 @@ public class GameController : MonoBehaviour {
 
                 spawnPoints[spawnIndex].SpawnItem(itemIndex);
                 //Debug.Log("Spawn attempt made at point " + spawnIndex);
-                yield return new WaitForSeconds(spawnWait);
 
                 if (gameOver)
                 {
-                    restartText.text = "Press 'Space' to Restart";
+                    yield return new WaitForSeconds(restartWait);
+                    //restartText.text = "Press 'Space' to Restart";
+                    restartSprite.enabled = true;
                     restart = true;
                     break;
                 }
+                yield return new WaitForSeconds(spawnWait);
             }
             yield return new WaitForSeconds(waveWait);
         }
@@ -145,7 +149,8 @@ public class GameController : MonoBehaviour {
         gameOver = true;
         playerAnim.SetBool("Dead", true);
         GameData.score1 = score;
-        gameOverText.text = "GAME OVER";
+        //gameOverText.text = "GAME OVER";
+        gameOverSprite.enabled = true;
         Destroy(player.GetComponent<PlayerController>());
     }
 

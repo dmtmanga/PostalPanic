@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
     public GameController gameController;
+    public GameObject explosion;
     public float[] pos = new float[4];
     public int lane;
     public float y_pos;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (col.gameObject.tag == "Bomb")
         {
+            Instantiate(explosion, transform.position, Quaternion.identity);
             gameController.TakeDamage(3);
             Destroy(col.gameObject);
         }
