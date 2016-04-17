@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-    public GameController gameController;
+    private GameController gameController;
     public GameObject explosion;
 
     public float[] pos = new float[4];
@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
 
     void Awake()
     {
+        GameObject GC = GameObject.FindGameObjectWithTag("GameController");
+        gameController = GC.GetComponent<GameController>();
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
     }
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (col.gameObject.tag == "Bomb")
         {
+            source.pitch = 1f;
             source.PlayOneShot(explode);
             Instantiate(explosion, transform.position, Quaternion.identity);
             gameController.TakeDamage(3);
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            source.pitch = 0.75f;
             source.PlayOneShot(pickup);
             anim.SetTrigger("ItemPickUp");
             ItemController item = col.gameObject.GetComponent<ItemController>();

@@ -29,8 +29,6 @@ public class GameController : MonoBehaviour {
 
     private int score;
     public GUIText scoreText;
-    //public GUIText restartText;
-    //public GUIText gameOverText;
     public GameObject gameOverSpriteObj;
     public GameObject restartSpriteObj;
     public GameObject collectMailSpriteObj;
@@ -58,8 +56,6 @@ public class GameController : MonoBehaviour {
         restart = false;
         score = 0;
         scoreText.text = "" + score;
-        //restartText.text = "";
-        //gameOverText.text = "";
         gameOverSpriteObj.SetActive(false);
         restartSpriteObj.SetActive(false);
         collectMailSpriteObj.SetActive(false);
@@ -83,10 +79,10 @@ public class GameController : MonoBehaviour {
     IEnumerator Instructions()
     {
         collectMailSpriteObj.SetActive(true);
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3f);
         collectMailSpriteObj.GetComponent<SpriteRenderer>().enabled = false;
         dontBlowUpSpriteObj.SetActive(true);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(4.5f);
         collectMailSpriteObj.SetActive(false);
         dontBlowUpSpriteObj.SetActive(false);
         gameStart = true;
@@ -117,7 +113,6 @@ public class GameController : MonoBehaviour {
                 if (gameOver)
                 {
                     yield return new WaitForSeconds(restartWait);
-                    //restartText.text = "Press 'Space' to Restart";
                     restartSpriteObj.SetActive(true);
                     restart = true;
                     break;
@@ -169,13 +164,18 @@ public class GameController : MonoBehaviour {
             Destroy(player.GetComponent<PlayerController>());
             GameData.score1 = score;
             yield return new WaitForSeconds(2f);
-            //gameOverText.text = "GAME OVER";
             gameOverSpriteObj.SetActive(true);
             audioSource.Stop();
             audioSource.clip = gameOverBgm;
             audioSource.Play();
             
         }
+    }
+
+
+    public bool isGameOver()
+    {
+        return gameOver;
     }
 
 
@@ -193,9 +193,10 @@ public class GameController : MonoBehaviour {
             if(!gameOver)
                 audioSource.PlayOneShot(itemMiss);
         }
-            if (hp <= 0)
+        if (hp <= 0)
             StartCoroutine(GameOver());
-
+        else
+            playerAnim.SetBool("NearMiss", false);
         UpdateHealthUI();
     }
 

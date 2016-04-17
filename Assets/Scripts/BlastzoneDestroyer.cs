@@ -3,14 +3,31 @@ using System.Collections;
 
 public class BlastzoneDestroyer : MonoBehaviour {
 
-    public GameController gameController;
+    private GameController gameController;
+    private GameObject player;
+    private Animator playerAnim;
 
+    void Awake()
+    {
+        GameObject GC = GameObject.FindGameObjectWithTag("GameController");
+        gameController = GC.GetComponent<GameController>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerAnim = player.GetComponent<Animator>();
+
+    }
 
     // When an item collides with the blastzone
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag != "Bomb")
-            gameController.TakeDamage(1);
+        if (!gameController.isGameOver())
+        {
+            float playerDistance = Mathf.Abs(col.transform.position.x - player.transform.position.x);
+            if (playerDistance < 0.5f)
+                playerAnim.SetBool("NearMiss", true);
+            if (col.tag != "Bomb")
+                gameController.TakeDamage(1);
+        }
         Destroy(col.gameObject);
     }
 }
