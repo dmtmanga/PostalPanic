@@ -184,11 +184,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 438128, guid: 9dbe494e117669e4fa3da4c484ebf60e, type: 2}
       propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 21230592, guid: 9dbe494e117669e4fa3da4c484ebf60e, type: 2}
-      propertyPath: m_Enabled
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 126116, guid: 9dbe494e117669e4fa3da4c484ebf60e, type: 2}
       propertyPath: m_IsActive
@@ -337,7 +333,7 @@ MonoBehaviour:
   player: {fileID: 268973547}
   bgm: {fileID: 8300000, guid: df66f964bb884394888353044e859c8c, type: 3}
   gameOverBgm: {fileID: 8300000, guid: e9cff82d19b340844bc50e2c3066bd31, type: 3}
-  itemMiss: {fileID: 8300000, guid: 46f921c425e8043f797ad496e6670211, type: 3}
+  itemMiss: {fileID: 8300000, guid: f2c4ac29a6e36774fbdee5733b5c5805, type: 3}
   itemsPerWave: 30
   startWait: 8
   restartWait: 5
@@ -885,7 +881,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 464094, guid: d2e0e98a40759c14dbbb95957432f7b8, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 102606, guid: d2e0e98a40759c14dbbb95957432f7b8, type: 2}
       propertyPath: m_IsActive

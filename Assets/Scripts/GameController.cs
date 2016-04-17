@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameData
 {
+    public static bool firstPlay = true;
     public static int score1 = 0;
     public static int score2 = 0;
 }
@@ -62,7 +63,8 @@ public class GameController : MonoBehaviour {
         dontBlowUpSpriteObj.SetActive(false);
         hp = 3;
         UpdateHealthUI();
-        StartCoroutine (Instructions());
+        if (GameData.firstPlay)
+            StartCoroutine(Instructions());
         StartCoroutine (SpawnWaves());
     }
 
@@ -79,10 +81,10 @@ public class GameController : MonoBehaviour {
     IEnumerator Instructions()
     {
         collectMailSpriteObj.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3.5f);
         collectMailSpriteObj.GetComponent<SpriteRenderer>().enabled = false;
         dontBlowUpSpriteObj.SetActive(true);
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4f);
         collectMailSpriteObj.SetActive(false);
         dontBlowUpSpriteObj.SetActive(false);
         gameStart = true;
@@ -90,7 +92,11 @@ public class GameController : MonoBehaviour {
 
     IEnumerator SpawnWaves()
     {
-        yield return new WaitForSeconds(startWait);
+        if (GameData.firstPlay)
+            yield return new WaitForSeconds(startWait);
+        else
+            yield return new WaitForSeconds(2f);
+        gameStart = true;
         while (true)
         {
             for (int i = 0; i < itemsPerWave; i++)
@@ -114,6 +120,7 @@ public class GameController : MonoBehaviour {
                 {
                     yield return new WaitForSeconds(restartWait);
                     restartSpriteObj.SetActive(true);
+                    GameData.firstPlay = false;
                     restart = true;
                     break;
                 }
@@ -164,11 +171,12 @@ public class GameController : MonoBehaviour {
             Destroy(player.GetComponent<PlayerController>());
             GameData.score1 = score;
             yield return new WaitForSeconds(2f);
-            gameOverSpriteObj.SetActive(true);
             audioSource.Stop();
             audioSource.clip = gameOverBgm;
             audioSource.Play();
-            
+            gameOverSpriteObj.SetActive(true);
+            yield return new WaitForSeconds(1.2f);
+            gameOverSpriteObj.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
