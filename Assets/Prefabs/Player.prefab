@@ -157,6 +157,7 @@ MonoBehaviour:
   lane: 2
   y_pos: -2.42
   explode: {fileID: 8300000, guid: 229bd9e1094e45540a54837c8c87a58e, type: 3}
+  move: {fileID: 8300000, guid: 1318b92418365f34cb46d2801b46f539, type: 3}
   pickup: {fileID: 8300000, guid: 748f63de8c02a451fbffd55e0069f3e1, type: 3}
 --- !u!212 &21293230
 SpriteRenderer:
