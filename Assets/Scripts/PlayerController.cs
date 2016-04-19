@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
     private Animator anim;
     private AudioSource source;
     public AudioClip explode;
-    public AudioClip exploderp;
+    public AudioClip move;
     public AudioClip pickup;
 
     void Awake()
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
         else
         {
             source.pitch = 0.75f;
-            source.PlayOneShot(pickup);
+            source.PlayOneShot(pickup, 0.75f);
             anim.SetTrigger("ItemPickUp");
             ItemController item = col.gameObject.GetComponent<ItemController>();
             gameController.Score(item.NumOfPoints());
@@ -65,10 +65,12 @@ public class PlayerController : MonoBehaviour {
         // check for input
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
+            source.PlayOneShot(move, 0.35f);
             lane -= 1;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
+            source.PlayOneShot(move, 0.35f); 
             lane += 1;
         }
 

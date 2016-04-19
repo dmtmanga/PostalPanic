@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour {
     public AudioClip bgm;
     public AudioClip gameOverBgm;
     public AudioClip itemMiss;
+    public AudioClip[] waveAudioMixer = new AudioClip[3];
+    public int wavesPerAudioClip;
 
     private bool gameStart;
     private bool gameOver;
@@ -81,10 +83,10 @@ public class GameController : MonoBehaviour {
     IEnumerator Instructions()
     {
         collectMailSpriteObj.SetActive(true);
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3.2f);
         collectMailSpriteObj.GetComponent<SpriteRenderer>().enabled = false;
         dontBlowUpSpriteObj.SetActive(true);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(4.3f);
         collectMailSpriteObj.SetActive(false);
         dontBlowUpSpriteObj.SetActive(false);
         gameStart = true;
@@ -92,6 +94,8 @@ public class GameController : MonoBehaviour {
 
     IEnumerator SpawnWaves()
     {
+        int waveCountDown = wavesPerAudioClip;
+
         if (GameData.firstPlay)
             yield return new WaitForSeconds(startWait);
         else
@@ -99,11 +103,16 @@ public class GameController : MonoBehaviour {
         gameStart = true;
         while (true)
         {
+            int prevClip = 0;           // to make sure the same audio clip doesn't play twice
+
+            // wave begins
             for (int i = 0; i < itemsPerWave; i++)
             {
+                // pick spawn point
                 int spawnIndex = Random.Range(0, 4);
+                // pick item
                 int rngValue = Random.Range(0, 100);
-                int itemIndex; // 0: postcard | 1: letter | 2: package | 3: bomb
+                int itemIndex;          // 0: postcard | 1: letter | 2: package | 3: bomb
                 if (rngValue < 20)
                     itemIndex = 0;
                 else if (rngValue < 50)
@@ -113,20 +122,38 @@ public class GameController : MonoBehaviour {
                 else
                     itemIndex = 3;
 
+                // spawn the selected item from the selected spawn point
                 spawnPoints[spawnIndex].SpawnItem(itemIndex);
-                //Debug.Log("Spawn attempt made at point " + spawnIndex);
 
                 if (gameOver)
                 {
+                    // spawn only 1 item and set restart flag to true after a pause
                     yield return new WaitForSeconds(restartWait);
                     restartSpriteObj.SetActive(true);
                     GameData.firstPlay = false;
                     restart = true;
                     break;
                 }
-                yield return new WaitForSeconds(spawnWait);
+                yield return new WaitForSeconds(spawnWait); // single item spawn ends
             }
-            yield return new WaitForSeconds(waveWait);
+
+            if (!gameOver)
+            {
+                // play voice clip if it should be played
+                waveCountDown--;
+                if (waveCountDown <= 0)
+                {
+                    int clip = Random.Range(0, 6);
+                    // make sure same clip doesn't play twice
+                    while (clip == prevClip)
+                    {
+                        clip = Random.Range(0, 6);
+                    }
+                    audioSource.PlayOneShot(waveAudioMixer[clip], 1.5f);
+                    waveCountDown = wavesPerAudioClip;
+                }
+            }
+            yield return new WaitForSeconds(waveWait);  // wave ends
         }
     }
 

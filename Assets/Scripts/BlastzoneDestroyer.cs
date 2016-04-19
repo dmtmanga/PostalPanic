@@ -22,12 +22,15 @@ public class BlastzoneDestroyer : MonoBehaviour {
     {
         if (!gameController.isGameOver())
         {
-            float playerDistance = Mathf.Abs(col.transform.position.x - player.transform.position.x);
-            if (playerDistance < 0.5f)
-                playerAnim.SetBool("NearMiss", true);
             if (col.tag != "Bomb")
+            {
+                float playerDistance = Mathf.Abs(col.transform.position.x - player.transform.position.x);
+                if (playerDistance < 0.5f)
+                    playerAnim.SetBool("NearMiss", true);
                 gameController.TakeDamage(1);
+            }
         }
+
         Destroy(col.gameObject);
     }
 }

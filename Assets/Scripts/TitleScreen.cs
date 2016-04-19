@@ -9,6 +9,8 @@ public class TitleScreen : MonoBehaviour {
     public GameObject startButton;
     public GameObject devScreen;
 
+    private GameObject player;
+
     public float startWait;
     public float stampWait;
 
@@ -16,6 +18,12 @@ public class TitleScreen : MonoBehaviour {
 
     private bool readyToAnimate = false;
     private bool gameIsReady = false;
+
+
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Start()
     {
@@ -51,10 +59,30 @@ public class TitleScreen : MonoBehaviour {
 
     IEnumerator StartGame()
     {
+        // play the start jingle and stop the button animation
         AudioSource startAudio = startButton.GetComponent<AudioSource>();
+        GetComponent<AudioSource>().Stop();
         startAudio.PlayOneShot(startJingle);
         startButton.GetComponent<Animator>().Stop();
         yield return new WaitForSeconds(startWait);
+
+        // move the mailman into screen
+        PlayerController playerCont = player.GetComponent<PlayerController>();
+        AudioSource playerAudio = player.GetComponent<AudioSource>();
+        player.transform.position = new Vector3(playerCont.pos[3], playerCont.y_pos, 0f);
+        playerAudio.PlayOneShot(playerCont.move);
+        yield return new WaitForSeconds(startWait);
+
+        // disable all the title/text elements
+        title.SetActive(false);
+        stamp.SetActive(false);
+        startButton.SetActive(false);
+
+        // move the mailman in to position
+        player.transform.position = new Vector3(playerCont.pos[2], playerCont.y_pos, 0f);
+        playerAudio.PlayOneShot(playerCont.move);
+        yield return new WaitForSeconds(startWait);
+
         SceneManager.LoadScene("Game01");
     }
 

@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167a012173d78ba4f8897b1065eff9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
   explosion: {fileID: 188748, guid: 0abee7a8f49fc8e46bfdfd7801ebd960, type: 2}
   pos:
   - -3.55
@@ -158,9 +157,7 @@ MonoBehaviour:
   lane: 2
   y_pos: -2.42
   explode: {fileID: 8300000, guid: 229bd9e1094e45540a54837c8c87a58e, type: 3}
-  exploderp: {fileID: 8300000, guid: d85a6b4b4176f5a4287263bdd6c6d089, type: 3}
   pickup: {fileID: 8300000, guid: 748f63de8c02a451fbffd55e0069f3e1, type: 3}
-  miss: {fileID: 8300000, guid: 46f921c425e8043f797ad496e6670211, type: 3}
 --- !u!212 &21293230
 SpriteRenderer:
   m_ObjectHideFlags: 1
