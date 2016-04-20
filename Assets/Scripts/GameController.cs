@@ -95,6 +95,7 @@ public class GameController : MonoBehaviour {
     IEnumerator SpawnWaves()
     {
         int waveCountDown = wavesPerAudioClip;
+        int prevClip = 0;           // to make sure same clip doesn't play back to back (also saves the "real pro" line for later)
 
         if (GameData.firstPlay)
             yield return new WaitForSeconds(startWait);
@@ -103,8 +104,6 @@ public class GameController : MonoBehaviour {
         gameStart = true;
         while (true)
         {
-            int prevClip = 0;           // to make sure the same audio clip doesn't play twice
-
             // wave begins
             for (int i = 0; i < itemsPerWave; i++)
             {
@@ -149,7 +148,8 @@ public class GameController : MonoBehaviour {
                     {
                         clip = Random.Range(0, 6);
                     }
-                    audioSource.PlayOneShot(waveAudioMixer[clip], 1.5f);
+                    audioSource.PlayOneShot(waveAudioMixer[clip], 2.5f);
+                    prevClip = clip;
                     waveCountDown = wavesPerAudioClip;
                 }
             }

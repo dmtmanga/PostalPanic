@@ -14,8 +14,15 @@ public class DevScreenAudioMix : MonoBehaviour {
 
     void Start()
     {
-        int clip = Random.Range(0,3);
-        audioSource.PlayOneShot(mixer[clip]);
+        StartCoroutine(PlayClip());
+    }
+
+    IEnumerator PlayClip()
+    {
+        FadeUp fadeUp = GetComponent<FadeUp>();
+        yield return new WaitForSeconds(fadeUp.screenTime);
+        int clip = Random.Range(0, 3);
+        audioSource.PlayOneShot(mixer[clip], 1.5f);
     }
 	
 }

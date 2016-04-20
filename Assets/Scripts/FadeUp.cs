@@ -33,7 +33,7 @@ public class FadeUp : MonoBehaviour {
             _currentCD--;
         }
 
-        if (transform.position.y > 10)
+        if (transform.position.y > 15)
         {
             titleScreen.ReadyToAnimate();
             Destroy(gameObject);

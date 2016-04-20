@@ -466,6 +466,7 @@ GameObject:
   - 212: {fileID: 879652254}
   - 95: {fileID: 879652253}
   - 82: {fileID: 879652255}
+  - 114: {fileID: 879652256}
   m_Layer: 0
   m_Name: Start Button
   m_TagString: Untagged
@@ -606,6 +607,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &879652256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 879652251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c809819356db88b42a65c80f88e9e505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: {fileID: 8300000, guid: fd384a2cae59e544297feb18f68571b1, type: 3}
+  startAlready: {fileID: 8300000, guid: f1cff8dde29ce1b418168feecd31dd73, type: 3}
+  startJingle: {fileID: 8300000, guid: 04d08b6e45e2df445ad694ebb817f689, type: 3}
 --- !u!1 &1504452693
 GameObject:
   m_ObjectHideFlags: 0

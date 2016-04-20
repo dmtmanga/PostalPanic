@@ -14,8 +14,6 @@ public class TitleScreen : MonoBehaviour {
     public float startWait;
     public float stampWait;
 
-    public AudioClip startJingle;
-
     private bool readyToAnimate = false;
     private bool gameIsReady = false;
 
@@ -60,10 +58,8 @@ public class TitleScreen : MonoBehaviour {
     IEnumerator StartGame()
     {
         // play the start jingle and stop the button animation
-        AudioSource startAudio = startButton.GetComponent<AudioSource>();
         GetComponent<AudioSource>().Stop();
-        startAudio.PlayOneShot(startJingle);
-        startButton.GetComponent<Animator>().Stop();
+        startButton.GetComponent<StartButtonAudio>().PlayStartJingle();
         yield return new WaitForSeconds(startWait);
 
         // move the mailman into screen

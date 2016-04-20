@@ -341,7 +341,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 461b7f8dd79f921498b6d1d44681d6e4, type: 3}
   - {fileID: 8300000, guid: 2e0646bacc407d3439cc684fa9d22087, type: 3}
   - {fileID: 8300000, guid: 04587ceb959958e4089c6668ffc490c6, type: 3}
-  wavesPerAudioClip: 3
+  wavesPerAudioClip: 2
   itemsPerWave: 30
   startWait: 8
   restartWait: 5
