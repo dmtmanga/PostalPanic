@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.18, y: -2.42, z: 0}
+  m_LocalPosition: {x: 1.17, y: -2.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -150,10 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 188748, guid: 0abee7a8f49fc8e46bfdfd7801ebd960, type: 2}
   pos:
-  - -3.55
-  - -1.18
-  - 1.18
-  - 3.67
+  - -3.51
+  - -1.17
+  - 1.17
+  - 3.674
   lane: 2
   y_pos: -2.42
   explode: {fileID: 8300000, guid: 229bd9e1094e45540a54837c8c87a58e, type: 3}

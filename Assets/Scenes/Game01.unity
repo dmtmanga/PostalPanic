@@ -499,7 +499,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 438936, guid: a9ed50497527dda42b4f9732e16425ff, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.67
+      value: 3.674
       objectReference: {fileID: 0}
     - target: {fileID: 438936, guid: a9ed50497527dda42b4f9732e16425ff, type: 2}
       propertyPath: m_LocalPosition.y
@@ -557,7 +557,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 438936, guid: a9ed50497527dda42b4f9732e16425ff, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.55
+      value: -3.51
       objectReference: {fileID: 0}
     - target: {fileID: 438936, guid: a9ed50497527dda42b4f9732e16425ff, type: 2}
       propertyPath: m_LocalPosition.y
@@ -699,7 +699,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 438936, guid: a9ed50497527dda42b4f9732e16425ff, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.18
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 438936, guid: a9ed50497527dda42b4f9732e16425ff, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1153,7 +1153,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 438936, guid: a9ed50497527dda42b4f9732e16425ff, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.18
+      value: -1.17
       objectReference: {fileID: 0}
     - target: {fileID: 438936, guid: a9ed50497527dda42b4f9732e16425ff, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1205,7 +1205,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 434154, guid: 0b4ef48861f947e4092d5dced668775d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.18
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 434154, guid: 0b4ef48861f947e4092d5dced668775d, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1235,10 +1235,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 11443042, guid: 0b4ef48861f947e4092d5dced668775d, type: 2}
-      propertyPath: gameController
-      value: 
-      objectReference: {fileID: 476173340}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b4ef48861f947e4092d5dced668775d, type: 2}
   m_IsPrefabParent: 0
