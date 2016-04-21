@@ -16,6 +16,7 @@ public class TitleScreen : MonoBehaviour {
 
     private bool readyToAnimate = false;
     private bool gameIsReady = false;
+    private bool startButtonHit = false;
 
 
     void Awake()
@@ -30,11 +31,15 @@ public class TitleScreen : MonoBehaviour {
 
     void Update()
     {
-       if (gameIsReady)
+        if (gameIsReady)
         {
-            if (Input.anyKeyDown)
+            if (!startButtonHit)
             {
-                StartCoroutine(StartGame());
+                if (Input.anyKeyDown)
+                {
+                    startButtonHit = true;
+                    StartCoroutine(StartGame());
+                }
             }
         }
         else if (readyToAnimate)
